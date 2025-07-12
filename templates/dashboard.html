@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <title>Dashboard</title>
+</head>
+<body>
+    <h1>Welcome to the Bus Pass Management System</h1>
+    <p>Hello, {{ user.name }}!</p>
+    <p>Experience a smarter, faster, and hassle-free way to manage your travel.</p>
+    <div class="button-row">
+    <p><a href="{{ url_for('index') }}">Back To Home</a></p>
+    <p><a href="{{ url_for('login') }}">Back To Login</a></p>
+    <p><a href="{{ url_for('apply') }}">Apply for Bus Pass</a></p>
+    {% if bus_pass %}
+            <p><a href="{{ url_for('view_pass', bus_pass_id=bus_pass['pass_id']) }}">View Passes Applied</a>
+<a href="{{ url_for('download_pass', pass_id=bus_pass['pass_id']) }}">Download Pass (PDF)</a>
+</p>
+        {% else %}
+            <p></p>
+        {% endif %}
+    <p><a href="{{ url_for('login') }}">Logout</a></p>
+    </div>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply for Bus Pass</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-box">
+        <h2>Apply for Bus Pass</h2>
+        <form method="POST">
+
+            <!-- Route Selection -->
+            <label for="route_id" style="color:white;">Select Route:</label><br>
+            <select name="route_id" required style="width: 90%; padding: 10px; margin: 8px 0; border-radius: 5px;">
+                <option value="" disabled selected hidden>Select a route</option>
+                {% for route in routes %}
+                    <option value="{{ route.route_id }}">{{ route.route_name }} ({{ route.origin }} → {{ route.destination }})</option>
+                {% endfor %}
+            </select><br>
+
+            <!-- Validity Selection -->
+            <label for="validity" style="color:white;">Select Validity Period:</label><br>
+            <select name="validity" required style="width: 90%; padding: 10px; margin: 8px 0; border-radius: 5px;">
+                <option value="" disabled selected hidden>Select validity period</option>
+                <option value="1">1 Day</option>
+                <option value="30">1 Month</option>
+                <option value="365">1 Year</option>
+            </select><br>
+
+            <!-- Submit -->
+            <input type="submit" class="green-button" value="Proceed to Payment">
+        </form>
+    </div>
+</body>
+</html>

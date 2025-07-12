@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Bus Passes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+
+    <div class="login-box">
+        <h2>Your Bus Passes</h2>
+    </div>
+
+    <div class="passes-container">
+        {% for bus_pass in all_passes %}
+            <div class="message-box">
+                <p><strong>Route:</strong> {{ bus_pass.route_name }}</p>
+                <p><strong>From:</strong> {{ bus_pass.origin }}</p>
+                <p><strong>To:</strong> {{ bus_pass.destination }}</p>
+                <p><strong>Issue Date:</strong> {{ bus_pass.issue_date }}</p>
+                <p><strong>Valid Until:</strong> {{ bus_pass.valid_until }}</p>
+                <p class="status-container"><strong>Status:</strong>
+  {% if bus_pass.status.lower() == 'live' and bus_pass.valid_until >= current_date %}
+    <span class="status-label live">Live</span>
+  {% elif bus_pass.valid_until < current_date %}
+    <span class="status-label expired">Expired</span>
+  {% else %}
+    <span class="status-label">{{ bus_pass.status.capitalize() }}</span>
+  {% endif %}
+</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <div class="button-row">
+        <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+    </div>
+
+</body>
+</html>

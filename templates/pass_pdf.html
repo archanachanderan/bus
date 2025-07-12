@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download PDF</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="login-box">
+        <h2>Bus Pass</h2>
+        <p><strong>Name:</strong> {{ bus_pass.name }}</p>
+        <p><strong>Email:</strong> {{ bus_pass.email }}</p>
+        <p><strong>Route:</strong> {{ bus_pass.route_name }} ({{ bus_pass.origin }} → {{ bus_pass.destination }})</p>
+        <p><strong>Issue Date:</strong> {{ bus_pass.issue_date }}</p>
+        <p><strong>Valid Until:</strong> {{ bus_pass.valid_until }}</p>
+        <p><strong>Status:</strong> {{ bus_pass.status.capitalize() }}</p>
+    </div>
+</body>
+</html>

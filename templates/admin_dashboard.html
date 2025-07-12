@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h2 style="text-align: center;">Admin Dashboard</h2>
+
+    <div class="section">
+        <h3>Registered Users</h3>
+        <table>
+            <tr>
+                <th>User ID</th>
+                <th>NAME</th>
+                <th>EMAIL</th>
+                <th>PASSWORD</th>
+            </tr>
+            {% for u in users %}
+            <tr>
+                <td>{{ u.user_id }}</td>
+                <td>{{ u.name }}</td>
+                <td>{{ u.email }}</td>
+                <td>{{ u.password }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+
+        <h3>Issued Bus Passes</h3>
+        <table>
+            <tr>
+                <th>Pass ID</th>
+                <th>User</th>
+                <th>Route</th>
+                <th>From</th>
+                <th>To</th>
+                <th>Issue Date</th>
+                <th>Valid Until</th>
+                <th>Status</th>
+                <th>Amount Paid</th>
+                <th>Payment Date</th>
+            </tr>
+
+            {% for p in passes %}
+            <tr>
+                <td>{{ p.pass_id }}</td>
+                <td>{{ p.user_name }} ({{ p.email }})</td>
+                <td>{{ p.route_name }}</td>
+                <td>{{ p.origin }}</td>
+                <td>{{ p.destination }}</td>
+                <td>{{ p.issue_date }}</td>
+                <td>{{ p.valid_until }}</td>
+                <td>
+                    <div class="status-container">
+                        {% if p.valid_until < current_date %}
+                           <span class="status-label expired">Expired</span>
+ 			{% else %}
+    			    <span class="status-label live">Live</span>
+			{% endif %}
+                    </div>
+                </td>
+                <td>{{ p.amount if p.amount else "Not Paid" }}</td>
+                <td>{{ p.payment_date if p.payment_date else "N/A" }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+
+    <div class="button-row">
+        <p><a href="{{ url_for('index') }}">Back To Home</a></p>
+        <p><a href="{{ url_for('admin_logout') }}">Back To Login</a></p>
+        <p><a href="{{ url_for('login') }}">Logout</a></p>
+    </div>
+</body>
+</html>
