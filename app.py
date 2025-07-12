@@ -10,20 +10,18 @@ from flask import make_response
 from xhtml2pdf import pisa
 from io import BytesIO
 
-
 # Load environment variables from .env file
 load_dotenv()
 
 app = Flask(__name__)
 app.secret_key = os.getenv('SECRET_KEY', 'your_secret_key')
 
-# MySQL configuration from .env
 DB_CONFIG = {
     'host': os.getenv('DB_HOST'),
     'user': os.getenv('DB_USER'),
     'password': os.getenv('DB_PASSWORD'),
     'database': os.getenv('DB_NAME'),
-    'port': int(os.getenv('DB_PORT', 3306)), 
+    'port': int(os.getenv('DB_PORT', 3306))
 }
 
 def get_db_connection():
